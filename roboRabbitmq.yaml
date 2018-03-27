@@ -19,26 +19,3 @@ spec:
           - name: port1
             containerPort: 5672
             protocol: TCP   
- 
----
- 
-kind: Service
-apiVersion: v1
-metadata:
-  name: roboRabbitmqService
-  annotations:
-     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-spec:
-  selector:
-    app: roboRabbitmqService
-  ports:
-  - protocol: TCP
-    port: 443
-    targetPort: $(TARGET_PORT)
-  clusterIP: $(CLUSTER_IP)
-  loadBalancerIP: $(LOAD_BALANCER_IP)
-  type: LoadBalancer
-status:
-  loadBalancer:
-    ingress:
-    - ip: 0.0.0.1
