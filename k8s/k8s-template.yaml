@@ -18,4 +18,20 @@ spec:
         ports:
           - name: port1
             containerPort: 5672
-            protocol: TCP   
+            protocol: TCP
+
+---
+ 
+apiVersion: v1
+kind: Service
+metadata:
+  name: roborabbitmq-service
+spec:
+  selector:
+    run: roborabbitmq-service
+  ports:
+    - name: port1
+      protocol: TCP
+      port: 5672
+      targetPort: port1
+  type: NodePort
