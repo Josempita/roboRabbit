@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: robo-rabbitmq
+  name: roborabbitmq
   labels:
-    run: robo-rabbitmq
+    run: roborabbitmq
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        run: robo-rabbitmq
+        run: roborabbitmq
     spec:
       containers:
-      - name: robo-rabbitmq
+      - name: roborabbitmq
         image: docker/image:latest
         imagePullPolicy: Always
         ports:

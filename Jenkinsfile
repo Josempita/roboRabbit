@@ -14,14 +14,14 @@ node {
         // Change deployed image in canary to the one we just built
         sh("sed -i.bak 's#docker/image#${imageTag}#' ./k8s/*.yaml")
         sh("kubectl --namespace=robo-prod apply -f k8s/")
-        sh("echo http://`kubectl --namespace=robo-prod get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+        //sh("echo http://`kubectl --namespace=robo-prod get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
         break
   // Roll out to production
     case "robo-dev":
         // Change deployed image in canary to the one we just built
         sh("sed -i.bak 's#docker/image#${imageTag}#' ./k8s/*.yaml")
         sh("kubectl --namespace=robo-dev apply -f k8s/")
-        sh("echo http://`kubectl --namespace=robo-dev get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+        //sh("echo http://`kubectl --namespace=robo-dev get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
         break
     // Roll out a dev environment
     default:
