@@ -1,44 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: roboRabbitmq
+  name: robo-rabbitmq
   labels:
-    run: roboRabbitmq
+    run: robo-rabbitmq
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        run: roboRabbitmq
+        run: robo-rabbitmq
     spec:
       containers:
-      - name: roboRabbitmq
-        image: rabbitmq:latest
+      - name: robo-rabbitmq
+        image: docker/image:latest
         imagePullPolicy: Always
         ports:
           - name: port1
             containerPort: 5672
             protocol: TCP   
- 
----
- 
-kind: Service
-apiVersion: v1
-metadata:
-  name: roboRabbitmqService
-  annotations:
-     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-spec:
-  selector:
-    app: roboRabbitmq-service
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 9376
-  clusterIP: 0.0.0.1
-  loadBalancerIP: 0.0.0.1
-  type: LoadBalancer
-status:
-  loadBalancer:
-    ingress:
-    - ip: 0.0.0.1
