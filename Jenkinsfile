@@ -8,9 +8,6 @@ node {
 
   stage "Deploy Application"
   
-   sh("kubectl delete configmap robo-rabbit-config --namespace='${env.BRANCH_NAME}' --ignore-not-found=true")
-   sh("kubectl create configmap robo-rabbit-config --from-file=./${env.BRANCH_NAME}/config.env --namespace='${env.BRANCH_NAME}' ")
-  
   switch (env.BRANCH_NAME) {
     // Roll out to production
     case "robo-prod":
